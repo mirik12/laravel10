@@ -1,0 +1,22 @@
+﻿stages:
+  - Test
+  - Deploy
+  - Build
+
+variables:
+  TERM: xterm-color
+  REGISTRY_HOST: gitlab.com
+  REGISTRY_NAMESPACE: mirik12mirik/secretic
+
+Build:
+  stage: Build
+  image: docker:latest
+  services:
+    - name: docker:dind
+      alias: docker
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $REGISTRY_HOST
+    - docker build -t $REGISTRY_HOST/$REGISTRY_NAMESPACE:$CI_COMMIT_REF_NAME .
+    - docker push $REGISTRY_HOST/$REGISTRY_NAMESPACE:$CI_COMMIT_REF_NAME
+  only:
+    - main

@@ -1,0 +1,22 @@
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+.navbar-brand {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+.footer-logo {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+.navbar {
+    padding-top: 16px;
+}

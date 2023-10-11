@@ -1,0 +1,76 @@
+# deptrac.yaml
+deptrac:
+  paths:
+    - ./app
+  exclude_files:
+    - .*test.*
+  layers:
+    - name: Controller
+      collectors:
+        - type: directory
+          value: /app/Http/Controller/.*
+    - name: Request
+      collectors:
+        - type: directory
+          value: /app/Http/Requests/.*
+    - name: Repository
+      collectors:
+        - type: directory
+          value: /app/Repository/.*
+    - name: Service
+      collectors:
+        - type: directory
+          value: /app/Services/.*
+    - name: ServiceProvider
+      collectors:
+        - type: directory
+          value: /app/Providers/.*
+    - name: Model
+      collectors:
+        - type: directory
+          value: /app/Models/.*
+    # TODO Too general union -- divide by IlluminateDatabase, IlluminateSupport and ...
+    - name: Illuminate
+      collectors:
+        - type: classLike
+          value: Illuminate\\.*
+    - name: Hashids
+      collectors:
+        - type: classLike
+          value: Hashids\\Hashids
+    - name: Carbon
+      collectors:
+        - type: classLike
+          value: Carbon\\Carbon
+    - name: Laravel Sanctum
+      collectors:
+        - type: classLike
+          value: Laravel\\Sanctum\\.*
+  ruleset:
+    Controller:
+      - Request
+      - Illuminate
+      - Service
+      - Repository
+      - Model
+      - Carbon
+    Repository:
+      - Service
+      - Model
+      - Hashids
+      - Illuminate
+      - Carbon
+    Service:
+      - Repository
+      - Model
+    ServiceProvider:
+      - Service
+      - Repository
+      - Illuminate
+      - Hashids
+    Model:
+      - Illuminate
+      - Laravel Sanctum
+      - Carbon
+    Request:
+      - Illuminate

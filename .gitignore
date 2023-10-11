@@ -1,0 +1,34 @@
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/storage/.php_cs.cache
+/tmp
+/vendor
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.env
+
+# Folders with IDE`s settings
+/.idea
+/.vscode
+
+# Cache for Composer dependencies
+.phpunit.result.cache
+.php-cs-fixer.cache
+.deptrac.cache
+
+# PHPUnit coverage files
+/storage/coverage
+
+# Files with identifiers
+foo*.csv
+*.csv.success
+*.csv.duplicates
+*.csv.errors
+
+# OS X
+.DS_Store
