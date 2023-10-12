@@ -1,7 +1,7 @@
 stages:
   - Test
-  - Deploy
   - Build
+  - Deploy
 
 variables:
   TERM: xterm-color
@@ -89,3 +89,15 @@ Build:
       --push .
   only:
     - main
+
+Deploy:
+  stage: Deploy
+  tags:
+    - docker
+  image:
+    name: fluxcd/helm-operator:1.4.4
+  script:
+    - helm deploy -f
+  only:
+    - main
+  when: manual
