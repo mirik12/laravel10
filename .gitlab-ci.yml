@@ -87,7 +87,6 @@ Build:
       --file "${DOCKER_FILE}"
       --target=${TARGET_PROXY}
       --push .
-  needs: [test]
   only:
     - main
 
@@ -99,7 +98,6 @@ Deploy:
     name: fluxcd/helm-operator:1.4.4
   script:
     - helm deploy -f
-  needs: [test]
   only:
     - main
   when: manual
