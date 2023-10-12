@@ -3,7 +3,7 @@ ARG NGINX_IMAGE
 
 FROM ${PHP_IMAGE} as php_dev
 
-RUN apk --update add wget \
+RUN apk --update --no-cache add wget \
   curl \
   git \
   grep \
@@ -24,15 +24,32 @@ RUN apk --update add wget \
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
-# Install PHP extensions
-RUN docker-php-ext-install mysqli pdo pdo_mysql xml
+# Install php extensions
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+
+RUN set -eux; \
+    install-php-extensions \
+        apcu \
+        bcmath \
+        exif \
+        gd \
+        intl \
+        intl \
+        mbstring \
+        mysqli \
+        pcntl \
+        pdo \
+        pdo_mysql \
+        redis \
+        xml \
+        zip \
+    ;
+
 RUN pecl channel-update pecl.php.net \
     && pecl install memcached \
     && pecl install imagick \
     && docker-php-ext-enable memcached \
     && docker-php-ext-enable imagick
-
-RUN rm /var/cache/apk/*
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
