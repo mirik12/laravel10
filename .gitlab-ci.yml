@@ -24,7 +24,8 @@ Build:
     DOCKER_FILE: ${CI_PROJECT_DIR}/k8s/Dockerfile
   script:
     - echo ${CI_REGISTRY_PASSWORD} | docker login --username ${CI_REGISTRY_USER} --password-stdin ${REGISTRY_HOST}
-        - TARGET_IMAGE="${REGISTRY_HOST}/${REGISTRY_NAMESPACE}/${TARGET_APP}"
+    
+    - TARGET_IMAGE="${REGISTRY_HOST}/${REGISTRY_NAMESPACE}/${TARGET_APP}"
     - >
       echo "Build ${TARGET_IMAGE}:${CI_COMMIT_SHORT_SHA}" &&
       docker build -t ${TARGET_IMAGE}:${CI_COMMIT_SHORT_SHA}
