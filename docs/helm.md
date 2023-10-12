@@ -2,6 +2,7 @@
 
 ## Directory Structure
 
+```
 .
 └── k8s
     ├── Chart.yaml
@@ -19,8 +20,7 @@
         ├── serviceaccount.yaml
         └── tests
             └── test-connection.yaml
-
-
+```
 
 ## File Descriptions
 
