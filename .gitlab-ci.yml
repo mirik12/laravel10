@@ -5,8 +5,8 @@ stages:
 
 variables:
   TERM: xterm-color
-  REGISTRY_HOST: gitlab.com
-  REGISTRY_NAMESPACE: mirik12mirik/laravel-10
+  # REGISTRY_HOST: gitlab.com
+  REGISTRY_NAMESPACE: mirik12mirik
 
 Build:
   stage: Build
@@ -23,9 +23,9 @@ Build:
     TARGET_PROXY: nginx_dev
     DOCKER_FILE: ${CI_PROJECT_DIR}/k8s/Dockerfile
   script:
-    - echo ${CI_REGISTRY_PASSWORD} | docker login --username ${CI_REGISTRY_USER} --password-stdin ${REGISTRY_HOST}
+    - echo ${CI_REGISTRY_PASSWORD} | docker login --username ${CI_REGISTRY_USER} --password-stdin 
     
-    - TARGET_IMAGE="${REGISTRY_HOST}/${REGISTRY_NAMESPACE}/${TARGET_APP}"
+    - TARGET_IMAGE="${REGISTRY_NAMESPACE}/${TARGET_APP}"
     - >
       echo "Build ${TARGET_IMAGE}:${CI_COMMIT_SHORT_SHA}" &&
       docker build -t ${TARGET_IMAGE}:${CI_COMMIT_SHORT_SHA}
@@ -38,7 +38,7 @@ Build:
       --target=${TARGET_APP}
       --push .
 
-    - TARGET_IMAGE="${REGISTRY_HOST}/${REGISTRY_NAMESPACE}/${TARGET_PROXY}"
+    - TARGET_IMAGE="${REGISTRY_NAMESPACE}/${TARGET_PROXY}"
     - >
       echo "Build ${TARGET_IMAGE}:${CI_COMMIT_SHORT_SHA}" &&
       docker build -t ${TARGET_IMAGE}:${CI_COMMIT_SHORT_SHA}
