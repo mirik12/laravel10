@@ -4,12 +4,10 @@
 
 ```
 .
-└──**k8s
-    ├──**Chart.yaml
-    ├──**Dockerfile
-    ├── apache-deployment.yaml
+└──k8s
+    ├──Chart.yaml
+    ├──Dockerfile
     ├── docker-entrypoint.sh
-    ├── nginx-deployment.yaml
     └── templates
         ├── NOTES.txt
         ├── _helpers.tpl

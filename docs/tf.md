@@ -11,12 +11,13 @@ This repository contains Terraform code to create a basic Amazon EKS cluster.
 
 ## Directory Structure
 
-├── main.tf
-├── outputs.tf
-├── terraform.tf
-├── variables.tf
-└── tfvars
-
+.
+├── **/*
+│   ├── main.tf
+│   ├── outputs.tf
+│   ├── terraform.tf
+│   ├── variables.tf
+│   └── tfvars
 
 ## File Descriptions
 
