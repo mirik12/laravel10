@@ -4,9 +4,9 @@
 
 ```
 .
-└── k8s
-    ├── Chart.yaml
-    ├── Dockerfile
+└──**k8s
+    ├──**Chart.yaml
+    ├──**Dockerfile
     ├── apache-deployment.yaml
     ├── docker-entrypoint.sh
     ├── nginx-deployment.yaml
