@@ -3,9 +3,9 @@
 # Additional Resources
 For detailed documentation and setup instructions, please refer to the following files in the docs directory:
 
-[Terraform Setup ](docs/tf.md)
-[Helm Chart Usage ](docs/helm.md)
-[CI/CD Setup ](docs/cicd.md)
+- [Terraform Setup ](docs/tf.md)
+- [Helm Chart Usage ](docs/helm.md)
+- [CI/CD Setup ](docs/cicd.md)
 
 # Laravel 10 Boilerplate
 
