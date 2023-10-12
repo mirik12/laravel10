@@ -25,7 +25,7 @@ RUN apk --update add wget \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 # Install PHP extensions
-RUN docker-php-ext-install mysqli pdo pdo_mysql xml mbstring exif intl pcntl bcmath gd redis
+RUN docker-php-ext-install mysqli pdo pdo_mysql xml
 RUN pecl channel-update pecl.php.net \
     && pecl install memcached \
     && pecl install imagick \
