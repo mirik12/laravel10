@@ -97,7 +97,10 @@ Deploy:
   image:
     name: fluxcd/helm-operator:1.4.4
   script:
-    - helm deploy -f
+    - >
+      helm deploy -f k8s/values.yaml
+      --set webserver.php.repository.tag="${CI_COMMIT_SHORT_SHA}"
+      --set webserver.http.repository.tag="${CI_COMMIT_SHORT_SHA}"
   only:
     - main
   when: manual
