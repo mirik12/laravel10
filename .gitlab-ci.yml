@@ -8,6 +8,39 @@ variables:
   # REGISTRY_HOST: gitlab.com
   REGISTRY_NAMESPACE: mirik12mirik
 
+Test:
+  stage: Test
+  tags:
+    - docker
+  image:
+    name: sonarsource/sonar-scanner-cli:4.6
+    entrypoint: [""]
+
+  variables:
+    # Tells git to fetch all the branches of the project,
+    # required by the analysis task
+    GIT_DEPTH: "0"
+    # Defines the location of the analysis task cache
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"
+    SRC_BRANCH: "${CI_COMMIT_REF_NAME}"
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+
+  script:
+    - >-
+      sonar-scanner
+      -Dsonar.host.url=https://sonarcloud.io
+      -Dsonar.qualitygate.wait=true
+      -Dsonar.scm.provider=git
+      -Dsonar.branch.name=${SRC_BRANCH}
+  only:
+    - branches
+    - merge_requests
+  except:
+    - main
+
 Build:
   stage: Build
   tags: 
