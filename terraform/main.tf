@@ -1,34 +1,3 @@
-# provider "aws" {
-#   region = "eu-central-1"
-# }
-
-# module "eks" {
-#   source          = "terraform-aws-modules/eks/aws"
-#   cluster_name    = "my-eks-cluster"
-#   cluster_version = "1.20"
-#   #   subnets         = ["subnet-abcde012", "subnet-bcde012a", "subnet-fghi345a"]
-#   #   vpc_id          = "vpc-abcde012"
-#   subnet_ids = ["subnet-abcde012", "subnet-bcde012a", "subnet-fghi345a"]
-#   vpc_id     = "vpc-1234556abcdef"
-
-#   self_managed_node_group_defaults = {
-#     instance_type                          = "t3.micro"
-#     update_launch_template_default_version = true
-#     iam_role_additional_policies = {
-#       AmazonSSMManagedInstanceCore = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-#     }
-#   }
-
-#   tags = {
-#     Environment = "dev"
-#     Terraform   = "true"
-#   }
-# }
-# -----------------
-
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
 provider "aws" {
   region     = var.region
   access_key = var.access_key
