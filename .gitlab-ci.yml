@@ -35,6 +35,10 @@ Test:
       -Dsonar.qualitygate.wait=true
       -Dsonar.scm.provider=git
       -Dsonar.branch.name=${SRC_BRANCH}
+      -Dsonar.organization=mirik-laravel
+      -Dsonar.projectKey=mirik-laravel_php
+      -Dsonar.sources=.
+      -Dsonar.host.url=https://sonarcloud.io
   only:
     - branches
     - merge_requests
@@ -43,7 +47,7 @@ Test:
 
 Build:
   stage: Build
-  tags: 
+  tags:
     - docker
   image: docker:latest
   services:
@@ -56,8 +60,8 @@ Build:
     TARGET_PROXY: nginx_dev
     DOCKER_FILE: ${CI_PROJECT_DIR}/k8s/Dockerfile
   script:
-    - echo ${CI_REGISTRY_PASSWORD} | docker login --username ${CI_REGISTRY_USER} --password-stdin 
-    
+    - echo ${CI_REGISTRY_PASSWORD} | docker login --username ${CI_REGISTRY_USER} --password-stdin
+
     - TARGET_IMAGE="${REGISTRY_NAMESPACE}/${TARGET_APP}"
     - >
       echo "Build ${TARGET_IMAGE}:${CI_COMMIT_SHORT_SHA}" &&
