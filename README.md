@@ -1,90 +1,93 @@
-# Secretic
+*Author: [Myroslav Kyselytsia](mirik12mirik@gmail.com)*
 
-Secretic is a secure and user-friendly pastebin application that prioritizes privacy and simplicity.
+# Additional Resources
+For detailed documentation and setup instructions, please refer to the following files in the docs directory:
 
-The goal of this repository is to showcase good [Laravel](https://laravel.com) development practices with a simple application.
+CI/CD Setup (cicd.md)
+Helm Chart Usage (helm.md)
+Terraform Setup (tf.md)
+# Laravel 10 Boilerplate
 
-## Features
+The goal of this project is to serve as a boilerplate for Laravel 10
+utilizing light-weight alpine linux images for nginx and php 8.2 (fpm).
 
-- :fire:Burn after reading (the note is destroyed after the first reading)
-- :lock: Password protection
-- :clipboard: Copy note to clipboard in a click
-- :stopwatch: Expiration times, including a "forever" and "burn after reading" option
-- :hatched_chick: Admin panel built on [Filament](https://filamentphp.com)
+Stack:
 
-## Roadmap
+- app @ php:8.2-fpm-alpine
+- nginx @ nginx:alpine
+- mysql @ mysql
+- redis @ redis:alpine
+- worker-local @ php:8.2-alpine3.16
 
-The following features will be implemented soon:
+## TODO
 
-- Delete after view or X amount of time
-- End-to-end encryption <https://github.com/gomzyakov/secretic/issues/572>
-- File upload support (image, media and PDF preview)
-- Language selection <https://github.com/gomzyakov/secretic/issues/432>
-- QR code for paste URLs, to easily transfer them over to mobile devices <https://github.com/gomzyakov/secretic/issues/489>
-- API for integration with third parties <https://github.com/gomzyakov/secretic/issues/405>
+- add a basic, highly optional seeder for user
+- hook up worker-local so you have a queue to play with
+- create an example job/worker you might co-locate on same hardware
+- maybe add some ci/cd and even k8s stuff as an example to scale out workers/nginx/edges
 
-## Requesting features
+## Notes
 
-Open a [new issue](https://github.com/gomzyakov/secretic/issues/new) to request a feature (or if you find a bug).
+- docker/app docker/nginx will rely on supervisor to maintain their processes, yawn
+- Please see .env "#PORT FORWARDS" before starting in docker-compose
+-
 
-## How to run Secretic locally?
+## Installation
 
-I believe you already have Docker installed. If not, just do it on [Mac](https://docs.docker.com/desktop/install/mac-install/), [Windows](https://docs.docker.com/desktop/install/windows-install/) or [Linux](https://docs.docker.com/desktop/install/linux-install/).
-
-Build the `app` image with the following command:
-
-```shell
-docker compose build --no-cache
-```
-
->This command might take a few minutes to complete.
-
-When the build is finished, you can run the environment in background mode with:
+The default docker-compose config here exposes ports if you want them.  See .env's "PORT FORWARDS"
 
 ```shell
-docker compose up -d
+cp ./env.example ./.env
+docker-compose up --build -d app nginx mysql
+
+#docker-compose exec app php artisan migrate
 ```
 
-We’ll now run `composer install` to install the application dependencies:
+You can now access http://localhost:8022 (or whatever your FORWARD_NGINX_PORT is).
+
+Please keep ./composer.lock in docker/app container context, for example:
 
 ```shell
-docker compose exec app composer install
+docker-compose exec -u root app /bin/sh
+# then...
+# COMPOSER_MEMORY_LIMIT=-1 app composer install
+# COMPOSER_MEMORY_LIMIT=-1 app composer require awesome/package_etc
+# ymmv w/ COMPOSER_MEMORY_LIMIT maybe try without
 ```
 
-Copy the environment settings:
+-------------
 
-```shell
-docker compose exec app cp .env.local .env
-```
 
-Migrate DB & seed fake data with the `artisan` Laravel command-line tool:
+Creating an AWS EKS cluster using Terraform involves several steps. You need to set up the AWS CLI, install Terraform, and then use Terraform to create the EKS cluster. Here are the detailed steps:
 
-```shell
-docker compose exec app ./artisan migrate:fresh --seed
-```
+Step 1: Set up the AWS CLI
+Firstly, make sure that the AWS Command Line Interface (CLI) is installed on your machine. You can do this by running the following command:
+aws --version
 
-And open <http://127.0.0.1:8000> in your favorite browser. Happy using Secretic!
+If it's not installed, you can install it by following the official AWS guide registry.terraform.io.
 
-## Can I trust a instance of Secretic not hosted by me?
+After installing the AWS CLI, configure it with your AWS credentials:
+aws configure
 
-No. Anyone could modify the functionality of Secretic to expose your secret key to the server. We recommend using a instance you host or trust.
+Step 2: Install Terraform
+Next, install Terraform on your machine. You can verify if it's already installed by running:
+terraform --version
 
-## How to run terminal inside container?
+If it's not installed, you can install it by following the official Terraform guide developer.hashicorp.com.
 
-Just run:
+Step 3: Create a Terraform Configuration File
+Create a new directory for your Terraform configuration files, then create a file named main.tf in this directory. The configuration file will contain the AWS provider configuration and the EKS cluster resource.
 
-```bash
-docker exec -ti secretic-app bash
-```
+After you have created the main.tf file, initialize your Terraform configuration:
+terraform init
 
-## License
+Finally, create your EKS cluster:
+terraform apply
 
-This is open-sourced software licensed under the [MIT License](https://github.com/gomzyakov/php-code-style/blob/main/LICENSE).
+Terraform will show you what resources it plans to create. Type yes to proceed.
 
-[![GitHub release](https://img.shields.io/github/release/gomzyakov/secretic.svg)](https://github.com/gomzyakov/secretic/releases/latest)
-[![license](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/gomzyakov/secretic/blob/development/LICENSE)
-[![codecov](https://codecov.io/gh/gomzyakov/secretic/branch/main/graph/badge.svg?token=4CYTVMVUYV)](https://codecov.io/gh/gomzyakov/secretic)
+Once the process completes, your AWS EKS cluster should be up and running. You can verify this by going to the EKS section in the AWS Management Console.
 
-# -----------
+When you're done with the cluster, remember to destroy it to avoid unnecessary costs:
+terraform destroy
 
-terraform apply -var-file=tf.tfvars

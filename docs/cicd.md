@@ -43,3 +43,5 @@ This GitLab CI/CD configuration file automates the testing, building, and deploy
 4. After the `build` job, you can manually trigger the `deploy` job to deploy the application using Helm.
 
 This CI/CD configuration automates the testing, building, and deployment processes, ensuring efficient development and delivery of project. Make sure to configure  GitLab repository's CI/CD settings to enable pipelines and specify the necessary environment variables such as `CI_REGISTRY_USER` and `CI_REGISTRY_PASSWORD` for successful execution.
+
+*Author: [Myroslav Kyselytsia](mirik12mirik@gmail.com)*
