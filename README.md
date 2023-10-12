@@ -3,9 +3,10 @@
 # Additional Resources
 For detailed documentation and setup instructions, please refer to the following files in the docs directory:
 
-CI/CD Setup (cicd.md)
-Helm Chart Usage (helm.md)
-Terraform Setup (tf.md)
+[Terraform Setup ](docs/tf.md)
+[Helm Chart Usage ](docs/helm.md)
+[CI/CD Setup ](docs/cicd.md)
+
 # Laravel 10 Boilerplate
 
 The goal of this project is to serve as a boilerplate for Laravel 10
