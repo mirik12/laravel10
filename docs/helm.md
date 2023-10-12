@@ -3,24 +3,23 @@
 ## Directory Structure
 
 .
-├── k8s
-│ ├── Chart.yaml
-│ ├── Dockerfile
-│ ├── apache-deployment.yaml
-│ ├── docker-entrypoint.sh
-│ ├── nginx-deployment.yaml
-│ ├── templates
-│ │ ├── NOTES.txt
-│ │ ├── _helpers.tpl
-│ │ ├── deployment.yaml
-│ │ ├── hpa.yaml
-│ │ ├── ingress.yaml
-│ │ ├── service.yaml
-│ │ ├── serviceaccount.yaml
-│ │ └── tests
-│ │ └── test-connection.yaml
-│ └── values.yaml
-└── README.md
+└── k8s
+    ├── Chart.yaml
+    ├── Dockerfile
+    ├── apache-deployment.yaml
+    ├── docker-entrypoint.sh
+    ├── nginx-deployment.yaml
+    └── templates
+        ├── NOTES.txt
+        ├── _helpers.tpl
+        ├── deployment.yaml
+        ├── hpa.yaml
+        ├── ingress.yaml
+        ├── service.yaml
+        ├── serviceaccount.yaml
+        └── tests
+            └── test-connection.yaml
+
 
 
 ## File Descriptions
