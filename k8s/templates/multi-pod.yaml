@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: php
+  name: php
+spec:
+  containers:
+    - name: php_dev
+      image: mirik12mirik/php_dev:latest
+      ports:
+        - containerPort: 80
+      resources: {}
+    - name: nginx_dev
+      image: mirik12mirik/nginx_dev:latest
+      ports:
+        - containerPort: 8080
+      resources: {} 
+
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

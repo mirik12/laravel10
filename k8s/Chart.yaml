@@ -1,6 +1,9 @@
 apiVersion: v2
 name: my-laravel10
 description: A Helm chart for Kubernetes
+dependencies:
+  - name: mariadb
+    repository: oci://registry-1.docker.io/bitnamicharts/mariadb
 
 # A chart can be either an 'application' or a 'library' chart.
 #
