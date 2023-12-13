@@ -7,7 +7,7 @@ For detailed documentation and setup instructions, please refer to the following
 - [Helm Chart Usage ](docs/helm.md)
 - [CI/CD Setup ](docs/cicd.md)
 
-# Laravel 10 Boilerplate
+# Laravel 10 Boilerplate.
 
 The goal of this project is to serve as a boilerplate for Laravel 10
 utilizing light-weight alpine linux images for nginx and php 8.2 (fpm).
